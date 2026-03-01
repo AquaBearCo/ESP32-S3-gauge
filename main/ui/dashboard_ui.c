@@ -79,11 +79,20 @@ static void add_cycle_hotspot(lv_obj_t *parent)
     lv_obj_add_event_cb(tap, cycle_screen_event_cb, LV_EVENT_SHORT_CLICKED, NULL);
 }
 
-static lv_obj_t *create_named_screen(const char *title, const char *subtitle, uint32_t bg_hex)
+static lv_obj_t *create_named_screen(const char *title, const char *subtitle, uint32_t bg_hex, uint32_t accent_hex)
 {
     lv_obj_t *scr = lv_obj_create(NULL);
     lv_obj_set_style_bg_color(scr, lv_color_hex(bg_hex), 0);
     lv_obj_set_style_pad_all(scr, 0, 0);
+
+    lv_obj_t *ring = lv_obj_create(scr);
+    lv_obj_set_size(ring, 420, 420);
+    lv_obj_center(ring);
+    lv_obj_set_style_radius(ring, LV_RADIUS_CIRCLE, 0);
+    lv_obj_set_style_bg_opa(ring, LV_OPA_TRANSP, 0);
+    lv_obj_set_style_border_width(ring, 4, 0);
+    lv_obj_set_style_border_color(ring, lv_color_hex(accent_hex), 0);
+    lv_obj_set_style_pad_all(ring, 0, 0);
 
     lv_obj_t *name = lv_label_create(scr);
     lv_label_set_text(name, title);
@@ -308,12 +317,12 @@ void dashboard_ui_init(void)
 
     add_cycle_hotspot(scr);
 
-    s_screens[1] = create_named_screen("SPEEDO STARTUP", "ui/screens/speedo_startup.xml", 0x000000);
-    s_screens[2] = create_named_screen("SPEEDO SPLASH", "ui/screens/speedo_splash.xml", 0x050505);
-    s_screens[3] = create_named_screen("SPEEDO DAILY", "ui/screens/speedo_daily.xml", 0x0A0A0A);
-    s_screens[4] = create_named_screen("SPEEDO TRACK", "ui/screens/speedo_track.xml", 0x050505);
-    s_screens[5] = create_named_screen("ELEMENTS", "ui/screens/elements.xml", 0x101722);
-    s_screens[6] = create_named_screen("DASHBOARD BACKUP", "ui/screens/dashboard_round_backup.xml", 0x0A111A);
+    s_screens[1] = create_named_screen("SPEEDO STARTUP", "ui/screens/speedo_startup.xml", 0x0D1117, 0x4F8CC9);
+    s_screens[2] = create_named_screen("SPEEDO SPLASH", "ui/screens/speedo_splash.xml", 0x17120D, 0xE0A458);
+    s_screens[3] = create_named_screen("SPEEDO DAILY", "ui/screens/speedo_daily.xml", 0x11110D, 0xF25F5C);
+    s_screens[4] = create_named_screen("SPEEDO TRACK", "ui/screens/speedo_track.xml", 0x0F1410, 0x4CC38A);
+    s_screens[5] = create_named_screen("ELEMENTS", "ui/screens/elements.xml", 0x12102A, 0x8A7DFF);
+    s_screens[6] = create_named_screen("DASHBOARD BACKUP", "ui/screens/dashboard_round_backup.xml", 0x1A0F14, 0xFF77AA);
 
     lv_timer_create(update_timer_cb, 100, NULL);
     lv_timer_create(auto_cycle_timer_cb, AUTO_CYCLE_MS, NULL);
