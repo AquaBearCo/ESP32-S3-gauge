@@ -27,6 +27,8 @@ static lv_meter_indicator_t *s_alt_needle = NULL;
 
 static uint32_t s_hold_start_ms = 0;
 static uint32_t s_cal_feedback_until_ms = 0;
+static lv_obj_t *s_screens[3] = {0};
+static int s_screen_index = 0;
 
 static float clampf(float value, float min_v, float max_v)
 {
@@ -37,6 +39,26 @@ static float clampf(float value, float min_v, float max_v)
         return max_v;
     }
     return value;
+}
+
+static void cycle_screen_event_cb(lv_event_t *e)
+{
+    if (lv_event_get_code(e) != LV_EVENT_DOUBLE_CLICKED) {
+        return;
+    }
+    s_screen_index = (s_screen_index + 1) % 3;
+    lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
+}
+
+static void add_cycle_hotspot(lv_obj_t *parent)
+{
+    lv_obj_t *tap = lv_obj_create(parent);
+    lv_obj_set_size(tap, 480, 480);
+    lv_obj_set_style_bg_opa(tap, LV_OPA_TRANSP, 0);
+    lv_obj_set_style_border_opa(tap, LV_OPA_TRANSP, 0);
+    lv_obj_set_style_pad_all(tap, 0, 0);
+    lv_obj_add_flag(tap, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(tap, cycle_screen_event_cb, LV_EVENT_DOUBLE_CLICKED, NULL);
 }
 
 static void center_hold_event_cb(lv_event_t *e)
@@ -133,6 +155,7 @@ void dashboard_ui_init(void)
     lv_obj_t *scr = lv_scr_act();
     lv_obj_set_style_bg_color(scr, lv_color_hex(0x000000), 0);
     lv_obj_set_style_text_color(scr, lv_color_hex(0xF2F5F8), 0);
+    s_screens[0] = scr;
 
     lv_obj_t *root = lv_obj_create(scr);
     lv_obj_set_size(root, 440, 440);
@@ -242,6 +265,26 @@ void dashboard_ui_init(void)
     s_alt_min_label = lv_label_create(root);
     lv_obj_align(s_alt_min_label, LV_ALIGN_RIGHT_MID, -18, 76);
     lv_label_set_text(s_alt_min_label, "Min\n--");
+
+    add_cycle_hotspot(scr);
+
+    lv_obj_t *speedo_daily = lv_obj_create(NULL);
+    s_screens[1] = speedo_daily;
+    lv_obj_set_style_bg_color(speedo_daily, lv_color_hex(0x000000), 0);
+    lv_obj_t *daily_val = lv_label_create(speedo_daily);
+    lv_label_set_text(daily_val, "SPEEDO DAILY\n72 mph");
+    lv_obj_set_style_text_align(daily_val, LV_TEXT_ALIGN_CENTER, 0);
+    lv_obj_center(daily_val);
+    add_cycle_hotspot(speedo_daily);
+
+    lv_obj_t *speedo_track = lv_obj_create(NULL);
+    s_screens[2] = speedo_track;
+    lv_obj_set_style_bg_color(speedo_track, lv_color_hex(0x000000), 0);
+    lv_obj_t *track_val = lv_label_create(speedo_track);
+    lv_label_set_text(track_val, "SPEEDO TRACK\n128 mph");
+    lv_obj_set_style_text_align(track_val, LV_TEXT_ALIGN_CENTER, 0);
+    lv_obj_center(track_val);
+    add_cycle_hotspot(speedo_track);
 
     lv_timer_create(update_timer_cb, 100, NULL);
     update_timer_cb(NULL);
