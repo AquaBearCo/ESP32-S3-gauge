@@ -36,12 +36,12 @@ The default dashboard UI starts automatically.
 
 Workspace folder setup is already included:
 - Open `esp32-s3-gauge.code-workspace`
-- It includes one LVGL project folder: `lvgl-ui`
-- `lvgl-ui` has top-level `globals.xml` (required by the extension)
+- It includes one LVGL project folder: `ui`
+- `ui` has top-level `globals.xml` (required by the extension)
 
 Then in VS Code:
 - Run `LVGL: Open Editor` from Command Palette
-- If that command is missing, open an XML in `lvgl-ui` first, then run it again
+- If that command is missing, open an XML in `ui` first, then run it again
 - Use `Output: Show Output Channels` and pick `LVGL Editor` for logs
 - Click `Generate code`
 - Click `Compile project` (first compile can take time)
@@ -63,14 +63,14 @@ Build logic auto-detects `ui.h` there and compiles generated files.
 Use this when iterating UI quickly in LVGL Editor:
 
 1. Open `esp32-s3-gauge.code-workspace`.
-2. Open `lvgl-ui/screens/dashboard.xml`.
+2. Open `ui/screens/dashboard.xml`.
 3. Run `LVGL: Open Editor` and use the live preview pane.
 4. Click `Generate code` in LVGL Editor.
-5. Run VS Code task: `LVGL: Import lvgl-ui`.
+5. Run VS Code task: `LVGL: Import ui`.
 6. Flash device with task: `ESP-IDF: Flash + Monitor`.
 
 Notes:
-- `lvgl-ui` preview is your editor design surface.
+- `ui` preview is your editor design surface.
 - Firmware default dashboard in `main/ui/dashboard_ui.c` is code-driven.
 - If you want the generated editor UI to run on device, enable:
   `Gauge App Settings -> Use LVGL editor generated UI`.

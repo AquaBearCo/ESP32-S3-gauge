@@ -52,7 +52,7 @@
       "problemMatcher": []
     },
     {
-      "label": "LVGL: Import lvgl-ui",
+      "label": "LVGL: Import ui",
       "type": "shell",
       "command": "powershell",
       "args": [
@@ -61,15 +61,15 @@
         "-File",
         "${workspaceFolder}/tools/import_ui.ps1",
         "-Source",
-        "${workspaceFolder}/lvgl-ui"
+        "${workspaceFolder}/ui"
       ],
       "problemMatcher": []
     },
     {
-      "label": "LVGL: Import lvgl-ui + Flash + Monitor",
+      "label": "LVGL: Import ui + Flash + Monitor",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "LVGL: Import lvgl-ui",
+        "LVGL: Import ui",
         "ESP-IDF: Flash + Monitor"
       ],
       "problemMatcher": []

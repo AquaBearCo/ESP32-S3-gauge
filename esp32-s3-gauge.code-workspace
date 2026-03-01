@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "lvgl-ui",
-      "path": "lvgl-ui"
+      "name": "ui",
+      "path": "ui"
     },
     {
       "name": "esp32-s3-gauge",

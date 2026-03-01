@@ -21,3 +21,6 @@ _waveshare_demo_unpacked/
 lvgl-ui/build/
 lvgl-ui/build-host/
 lvgl-ui/build-idf/
+ui/build/
+ui/build-host/
+ui/build-idf/
