@@ -13,14 +13,29 @@
                 style_border_color="0x2E2E2E"
                 style_pad_all="0"
             >
-                <!-- Meter placeholder matching minimal-speedo concept -->
-                <lv_meter
+                <!-- Meter placeholder matching minimal-speedo concept (parser-safe) -->
+                <lv_obj
                     x="6"
                     y="6"
                     width="468"
                     height="468"
-                    style_bg_opa="0%"
-                    style_border_width="0"
+                    style_radius="234"
+                    style_bg_opa="0"
+                    style_border_width="2"
+                    style_border_color="0x3C3C3C"
+                    style_pad_all="0"
+                />
+
+                <lv_arc
+                    x="18"
+                    y="18"
+                    width="444"
+                    height="444"
+                    start_angle="135"
+                    end_angle="45"
+                    style_arc_width="2"
+                    style_arc_color="0xFFFFFF"
+                    style_arc_rounded="false"
                 />
 
                 <!-- Fuel arc (outer indicator) -->
