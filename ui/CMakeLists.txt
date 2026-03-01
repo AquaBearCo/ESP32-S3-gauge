@@ -23,14 +23,6 @@ include(${CMAKE_CURRENT_LIST_DIR}/file_list_gen.cmake)
 # Include any component libraries
 include(${CMAKE_CURRENT_LIST_DIR}/component_lib_list_gen.cmake)
 
-if (NOT DEFINED LV_EDITOR_COMPONENT_LIB_LIST)
-  set(LV_EDITOR_COMPONENT_LIB_LIST)
-endif()
-
-if (NOT DEFINED COMMON_INCLUDE_DIRS)
-  set(COMMON_INCLUDE_DIRS)
-endif()
-
 # Create the UI sources as a library
 add_library(${LIB_NAME} ${LV_EDITOR_PROJECT_SOURCES})
 if (DEFINED LV_EDITOR_COMPONENT_LIB_LIST)
