@@ -1,16 +1,25 @@
 <globals>
-    <config name="gmt800_dash" help="LVGL Editor project for ESP32-S3 gauge UI"/>
+    <api>
+        <!-- Add <enumdefs> here -->
+    </api>
 
     <consts>
-        <px name="gap_sm" value="8"/>
-        <px name="gap_md" value="12"/>
-        <px name="panel_radius" value="14"/>
+        <!-- Add <px>, <int>, <color> etc here -->
     </consts>
 
     <styles>
-        <style name="bg_root" bg_color="0x06090F"/>
-        <style name="bg_panel" bg_color="0x101722" radius="#panel_radius"/>
-        <style name="txt_primary" text_color="0xE8EEF5"/>
-        <style name="txt_muted" text_color="0x89A0B8"/>
+        <!-- Add <style> tags here -->
     </styles>
+
+    <subjects>
+        <!-- Add <int>, <string>, or <float> subjects here -->
+    </subjects>
+
+    <images>
+        <!-- Add <file> or <data> tags here -->
+    </images>
+
+    <fonts>
+        <!-- Add <bin> , <tiny_ttf>, <freetype> tags here -->
+    </fonts>
 </globals>
