@@ -1,0 +1,60 @@
+<screen>
+    <view>
+        <lv_obj width="480" height="480" style_bg_color="0x000000" style_border_width="0" style_pad_all="0">
+            <!-- Main speed meter shell -->
+            <lv_obj
+                x="0"
+                y="0"
+                width="480"
+                height="480"
+                style_radius="240"
+                style_bg_color="0x0A0A0A"
+                style_border_width="2"
+                style_border_color="0x2E2E2E"
+                style_pad_all="0"
+            >
+                <!-- Meter placeholder matching minimal-speedo concept -->
+                <lv_meter
+                    x="6"
+                    y="6"
+                    width="468"
+                    height="468"
+                    style_bg_opa="0%"
+                    style_border_width="0"
+                />
+
+                <!-- Fuel arc (outer indicator) -->
+                <lv_arc
+                    x="17"
+                    y="17"
+                    width="446"
+                    height="446"
+                    rotation="65"
+                    style_arc_width="4"
+                    style_arc_color="0x8A8A8A"
+                    style_arc_rounded="false"
+                />
+
+                <!-- Center hub -->
+                <lv_obj
+                    x="140"
+                    y="140"
+                    width="200"
+                    height="200"
+                    style_radius="100"
+                    style_bg_color="0x000000"
+                    style_border_width="1"
+                    style_border_color="0x595959"
+                    style_pad_all="0"
+                >
+                    <lv_label align="center" y="-26" text="72" style_text_color="0xFFFFFF" />
+                    <lv_label align="center" y="22" text="mph" style_text_color="0xE6E6E6" />
+                </lv_obj>
+
+                <!-- Fuel icon + text placeholder -->
+                <lv_label x="218" y="392" text="FUEL" style_text_color="0xB0B0B0" />
+                <lv_label x="222" y="414" text="67%" style_text_color="0xFFFFFF" />
+            </lv_obj>
+        </lv_obj>
+    </view>
+</screen>

@@ -30,6 +30,24 @@
 		<color name="accent2_dark" value="0x887A3D" />
 		<color name="accent2_50_light" value="0xf3f0e7" />
 		<color name="accent2_50_dark" value="0x4A473E" />
+
+		<!-- Minimal-speedo palette -->
+		<color name="palette_black" value="0x000000" />
+		<color name="palette_white" value="0xffffff" />
+		<color name="palette_grey" value="0x5A5A5A" />
+		<color name="palette_dark_grey" value="0x3C3C3C" />
+		<color name="palette_amber" value="0xFA8C00" />
+		<color name="palette_red" value="0xFF0000" />
+
+		<!-- Shared speedo sizing constants -->
+		<int name="tick_width" value="2" />
+		<int name="tick_length" value="15" />
+		<int name="tick_text_offset" value="30" />
+		<int name="outline_width" value="2" />
+		<int name="needle_width" value="5" />
+		<int name="needle_offset" value="-10" />
+		<int name="icon_movement" value="20" />
+		<int name="label_lower" value="20" />
 	</consts>
 
 	<styles>
