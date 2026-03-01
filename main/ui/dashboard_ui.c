@@ -7,6 +7,7 @@
 #include "app/sensor_service.h"
 
 #define CALIB_HOLD_MS 5000U
+#define AUTO_CYCLE_MS 5000U
 
 static lv_obj_t *s_status_label = NULL;
 static lv_obj_t *s_center_speed_value = NULL;
@@ -57,6 +58,13 @@ static void cycle_screen_event_cb(lv_event_t *e)
     } else {
         s_last_tap_ms = now;
     }
+}
+
+static void auto_cycle_timer_cb(lv_timer_t *timer)
+{
+    (void)timer;
+    s_screen_index = (s_screen_index + 1) % 3;
+    lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
 }
 
 static void add_cycle_hotspot(lv_obj_t *parent)
@@ -296,5 +304,6 @@ void dashboard_ui_init(void)
     add_cycle_hotspot(speedo_track);
 
     lv_timer_create(update_timer_cb, 100, NULL);
+    lv_timer_create(auto_cycle_timer_cb, AUTO_CYCLE_MS, NULL);
     update_timer_cb(NULL);
 }
