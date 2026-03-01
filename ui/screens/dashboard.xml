@@ -1,32 +1,43 @@
-<screen permanent="true">
-    <!-- Round-safe root -->
-    <lv_obj x="20" y="20" width="440" height="440" style_radius="220" style_bg_color="0x0A111A" style_border_color="0x1E2E43" style_border_width="2">
-        <lv_label x="120" y="12" text="IMU:OK BARO:OK P:1013.2 hPa" style_text_color="0x8CA3BD"/>
+<screen>
+    <view>
+        <column width="100%">
+            <row
+                width="100%"
+                style_flex_main_place="space_between"
+                style_pad_all="8"
+                style_bg_opa="100%"
+                style_bg_color="0x002c57"
+            >
+                <button text="First" />
+                <button text="Second" />
+                <button text="Third" />
+            </row>
 
-        <!-- Left pitch scale -->
-        <lv_arc x="14" y="86" width="160" height="266" start_angle="120" end_angle="240"
-            style_arc_width="12" style_arc_color="0x43C75A" style_arc_rounded="false"/>
-        <lv_label x="22" y="188" text="Pitch +1.2"/>
+            <column style_pad_all="8" style_pad_row="8">
+                <lv_checkbox text="First" />
+                <lv_checkbox text="Second" />
+                <lv_checkbox text="Third" ignore_layout="true" x="142" y="15" />
+                <lv_checkbox text="Fourth" />
+                <lv_checkbox text="Fifth" />
+                <lv_checkbox text="Sixth" />
+                <lv_checkbox text="Seventh" />
+                <lv_checkbox text="Eighth" />
+                <lv_checkbox text="Ninth" />
+                <lv_checkbox text="Tenth" />
+            </column>
 
-        <!-- Bottom roll scale -->
-        <lv_arc x="96" y="298" width="248" height="110" start_angle="225" end_angle="315"
-            style_arc_width="12" style_arc_color="0x43C75A" style_arc_rounded="false"/>
-        <lv_label x="110" y="356" text="Roll -0.8"/>
-        <lv_label x="196" y="356" text="Yaw +3.1  VSpd +0.40" style_text_color="0x9CB2C9"/>
+            <row
+                width="100%"
+                style_flex_main_place="space_between"
+                style_pad_all="8"
+                style_bg_opa="100%"
+                style_bg_color="0x111"
+                style_text_color="0xddd"
+            >
+                <lv_label text="Made by LVGL's UI editor" />
+            </row>
+        </column>
 
-        <!-- Right altitude scale -->
-        <lv_arc x="266" y="86" width="160" height="266" start_angle="300" end_angle="60"
-            style_arc_width="12" style_arc_color="0x2E8CE0" style_arc_rounded="false"/>
-        <lv_label x="312" y="94" text="Max&#10;3035"/>
-        <lv_label x="312" y="186" text="ALT&#10;2509"/>
-        <lv_label x="312" y="278" text="Min&#10;1887"/>
-
-        <!-- Center speed hub -->
-        <lv_obj x="132" y="126" width="176" height="176" style_radius="88" style_bg_color="0x030507" style_border_color="0x1D2D40" style_border_width="2">
-            <lv_label x="53" y="58" text="43.1"/>
-            <lv_label x="47" y="97" text="GPS MPH" style_text_color="0xD8E4F0"/>
-        </lv_obj>
-
-        <lv_label x="156" y="318" text="Hold 5.0s to Cal" style_text_color="0x9CB2C9"/>
-    </lv_obj>
+        <button text="Floating" floating="true" align="bottom_right" x="-20" y="-12" />
+    </view>
 </screen>
