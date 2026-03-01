@@ -8,6 +8,7 @@
 
 #define CALIB_HOLD_MS 5000U
 #define AUTO_CYCLE_MS 5000U
+#define TOTAL_SCREENS 7
 
 static lv_obj_t *s_status_label = NULL;
 static lv_obj_t *s_center_speed_value = NULL;
@@ -28,7 +29,7 @@ static lv_meter_indicator_t *s_alt_needle = NULL;
 
 static uint32_t s_hold_start_ms = 0;
 static uint32_t s_cal_feedback_until_ms = 0;
-static lv_obj_t *s_screens[3] = {0};
+static lv_obj_t *s_screens[TOTAL_SCREENS] = {0};
 static int s_screen_index = 0;
 static uint32_t s_last_tap_ms = 0;
 
@@ -52,7 +53,7 @@ static void cycle_screen_event_cb(lv_event_t *e)
     }
     const uint32_t now = lv_tick_get();
     if ((now - s_last_tap_ms) <= DOUBLE_TAP_WINDOW_MS) {
-        s_screen_index = (s_screen_index + 1) % 3;
+        s_screen_index = (s_screen_index + 1) % TOTAL_SCREENS;
         lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
         s_last_tap_ms = 0;
     } else {
@@ -63,7 +64,7 @@ static void cycle_screen_event_cb(lv_event_t *e)
 static void auto_cycle_timer_cb(lv_timer_t *timer)
 {
     (void)timer;
-    s_screen_index = (s_screen_index + 1) % 3;
+    s_screen_index = (s_screen_index + 1) % TOTAL_SCREENS;
     lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
 }
 
@@ -76,6 +77,28 @@ static void add_cycle_hotspot(lv_obj_t *parent)
     lv_obj_set_style_pad_all(tap, 0, 0);
     lv_obj_add_flag(tap, LV_OBJ_FLAG_CLICKABLE);
     lv_obj_add_event_cb(tap, cycle_screen_event_cb, LV_EVENT_SHORT_CLICKED, NULL);
+}
+
+static lv_obj_t *create_named_screen(const char *title, const char *subtitle, uint32_t bg_hex)
+{
+    lv_obj_t *scr = lv_obj_create(NULL);
+    lv_obj_set_style_bg_color(scr, lv_color_hex(bg_hex), 0);
+    lv_obj_set_style_pad_all(scr, 0, 0);
+
+    lv_obj_t *name = lv_label_create(scr);
+    lv_label_set_text(name, title);
+    lv_obj_set_style_text_align(name, LV_TEXT_ALIGN_CENTER, 0);
+    lv_obj_set_style_text_color(name, lv_color_hex(0xE8EEF5), 0);
+    lv_obj_align(name, LV_ALIGN_CENTER, 0, -12);
+
+    lv_obj_t *sub = lv_label_create(scr);
+    lv_label_set_text(sub, subtitle);
+    lv_obj_set_style_text_align(sub, LV_TEXT_ALIGN_CENTER, 0);
+    lv_obj_set_style_text_color(sub, lv_color_hex(0x9CB2C9), 0);
+    lv_obj_align(sub, LV_ALIGN_CENTER, 0, 16);
+
+    add_cycle_hotspot(scr);
+    return scr;
 }
 
 static void center_hold_event_cb(lv_event_t *e)
@@ -285,23 +308,12 @@ void dashboard_ui_init(void)
 
     add_cycle_hotspot(scr);
 
-    lv_obj_t *speedo_daily = lv_obj_create(NULL);
-    s_screens[1] = speedo_daily;
-    lv_obj_set_style_bg_color(speedo_daily, lv_color_hex(0x000000), 0);
-    lv_obj_t *daily_val = lv_label_create(speedo_daily);
-    lv_label_set_text(daily_val, "SPEEDO DAILY\n72 mph");
-    lv_obj_set_style_text_align(daily_val, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_center(daily_val);
-    add_cycle_hotspot(speedo_daily);
-
-    lv_obj_t *speedo_track = lv_obj_create(NULL);
-    s_screens[2] = speedo_track;
-    lv_obj_set_style_bg_color(speedo_track, lv_color_hex(0x000000), 0);
-    lv_obj_t *track_val = lv_label_create(speedo_track);
-    lv_label_set_text(track_val, "SPEEDO TRACK\n128 mph");
-    lv_obj_set_style_text_align(track_val, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_center(track_val);
-    add_cycle_hotspot(speedo_track);
+    s_screens[1] = create_named_screen("SPEEDO STARTUP", "ui/screens/speedo_startup.xml", 0x000000);
+    s_screens[2] = create_named_screen("SPEEDO SPLASH", "ui/screens/speedo_splash.xml", 0x050505);
+    s_screens[3] = create_named_screen("SPEEDO DAILY", "ui/screens/speedo_daily.xml", 0x0A0A0A);
+    s_screens[4] = create_named_screen("SPEEDO TRACK", "ui/screens/speedo_track.xml", 0x050505);
+    s_screens[5] = create_named_screen("ELEMENTS", "ui/screens/elements.xml", 0x101722);
+    s_screens[6] = create_named_screen("DASHBOARD BACKUP", "ui/screens/dashboard_round_backup.xml", 0x0A111A);
 
     lv_timer_create(update_timer_cb, 100, NULL);
     lv_timer_create(auto_cycle_timer_cb, AUTO_CYCLE_MS, NULL);
