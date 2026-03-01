@@ -72,7 +72,7 @@ lv_style_t txt_muted;
 
 void c_dev_esp32_s3_gauge_lvgl_ui_init_gen(const char * asset_path)
 {
-    char buf[256];
+    (void)asset_path;
 
     /*----------------
      * Global styles
