@@ -1,19 +1,21 @@
 <screen>
     <view>
-        <column width="100%">
-            <row
+        <lv_obj width="100%" style_layout="flex" style_flex_flow="column" style_pad_all="0" style_border_width="0">
+            <lv_obj
                 width="100%"
+                style_layout="flex"
+                style_flex_flow="row"
                 style_flex_main_place="space_between"
                 style_pad_all="8"
                 style_bg_opa="100%"
                 style_bg_color="0x002c57"
             >
-                <button text="First" />
-                <button text="Second" />
-                <button text="Third" />
-            </row>
+                <lv_btn><lv_label text="First" /></lv_btn>
+                <lv_btn><lv_label text="Second" /></lv_btn>
+                <lv_btn><lv_label text="Third" /></lv_btn>
+            </lv_obj>
 
-            <column style_pad_all="8" style_pad_row="8">
+            <lv_obj style_layout="flex" style_flex_flow="column" style_pad_all="8" style_pad_row="8" style_border_width="0">
                 <lv_checkbox text="First" />
                 <lv_checkbox text="Second" />
                 <lv_checkbox text="Third" ignore_layout="true" x="142" y="15" />
@@ -24,20 +26,23 @@
                 <lv_checkbox text="Eighth" />
                 <lv_checkbox text="Ninth" />
                 <lv_checkbox text="Tenth" />
-            </column>
+            </lv_obj>
 
-            <row
+            <lv_obj
                 width="100%"
+                style_layout="flex"
+                style_flex_flow="row"
                 style_flex_main_place="space_between"
                 style_pad_all="8"
                 style_bg_opa="100%"
                 style_bg_color="0x111"
-                style_text_color="0xddd"
             >
-                <lv_label text="Made by LVGL's UI editor" />
-            </row>
-        </column>
+                <lv_label text="Made by LVGL's UI editor" style_text_color="0xddd" />
+            </lv_obj>
+        </lv_obj>
 
-        <button text="Floating" floating="true" align="bottom_right" x="-20" y="-12" />
+        <lv_btn floating="true" align="bottom_right" x="-20" y="-12">
+            <lv_label text="Floating" />
+        </lv_btn>
     </view>
 </screen>
