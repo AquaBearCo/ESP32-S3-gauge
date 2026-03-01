@@ -1,0 +1,5 @@
+<screen>
+    <view>
+        <lv_label text="LVGL preview smoke test" />
+    </view>
+</screen>
