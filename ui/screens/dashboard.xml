@@ -1,5 +1,88 @@
 <screen>
     <view>
-        <lv_label text="LVGL preview smoke test" />
+        <lv_obj
+            x="0"
+            y="0"
+            width="480"
+            height="480"
+            style_bg_color="0x05080D"
+            style_border_width="0"
+            style_pad_all="0"
+        >
+            <lv_obj
+                x="20"
+                y="20"
+                width="440"
+                height="440"
+                style_radius="220"
+                style_bg_color="0x0C131C"
+                style_border_width="2"
+                style_border_color="0x1E2E43"
+                style_pad_all="0"
+            >
+                <!-- Left: pitch band -->
+                <lv_arc
+                    x="8"
+                    y="84"
+                    width="164"
+                    height="272"
+                    start_angle="120"
+                    end_angle="240"
+                    style_arc_width="12"
+                    style_arc_color="0x36BE56"
+                    style_arc_rounded="false"
+                />
+                <lv_label x="24" y="190" text="PITCH +1.2" />
+
+                <!-- Bottom: roll band -->
+                <lv_arc
+                    x="94"
+                    y="300"
+                    width="252"
+                    height="116"
+                    start_angle="225"
+                    end_angle="315"
+                    style_arc_width="12"
+                    style_arc_color="0x36BE56"
+                    style_arc_rounded="false"
+                />
+                <lv_label x="170" y="360" text="ROLL -0.8" />
+
+                <!-- Right: altitude band -->
+                <lv_arc
+                    x="268"
+                    y="84"
+                    width="164"
+                    height="272"
+                    start_angle="300"
+                    end_angle="60"
+                    style_arc_width="12"
+                    style_arc_color="0x2E8CE0"
+                    style_arc_rounded="false"
+                />
+                <lv_label x="316" y="92" text="MAX&#10;3035" />
+                <lv_label x="316" y="186" text="ALT&#10;2509" />
+                <lv_label x="316" y="280" text="MIN&#10;1887" />
+
+                <!-- Center hub -->
+                <lv_obj
+                    x="132"
+                    y="126"
+                    width="176"
+                    height="176"
+                    style_radius="88"
+                    style_bg_color="0x020406"
+                    style_border_width="2"
+                    style_border_color="0x1E2E43"
+                    style_pad_all="0"
+                >
+                    <lv_label x="54" y="58" text="43.1" />
+                    <lv_label x="50" y="96" text="GPS MPH" />
+                </lv_obj>
+
+                <lv_label x="148" y="16" text="Round 480x480 Gauge" style_text_color="0x91A9C2" />
+                <lv_label x="154" y="318" text="Hold 5s to Cal" style_text_color="0x91A9C2" />
+            </lv_obj>
+        </lv_obj>
     </view>
 </screen>
