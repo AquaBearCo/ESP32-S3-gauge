@@ -1,0 +1,6 @@
+{
+  "C_Cpp.default.configurationProvider": "espressif.esp-idf-extension",
+  "files.associations": {
+    "*.inc": "c"
+  }
+}

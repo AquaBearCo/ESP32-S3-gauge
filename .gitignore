@@ -1,0 +1,23 @@
+# Build output
+build/
+sdkconfig
+sdkconfig.old
+
+# ESP-IDF managed components (reproducible from idf_component.yml + dependencies.lock)
+managed_components/
+
+# ESP-IDF VS Code extension output
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.local.json
+
+# Editor exports and local scratch
+*.swp
+*.swo
+_waveshare_demo.zip
+_waveshare_demo_unpacked/
+
+# LVGL editor artifacts
+lvgl-ui/build/
+lvgl-ui/build-host/
+lvgl-ui/build-idf/

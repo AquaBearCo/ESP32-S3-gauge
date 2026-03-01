@@ -1,0 +1,91 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESP-IDF: Build",
+      "type": "shell",
+      "command": "idf.py build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: Flash",
+      "type": "shell",
+      "command": "idf.py -p ${input:serialPort} flash",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: Monitor",
+      "type": "shell",
+      "command": "idf.py -p ${input:serialPort} monitor",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP-IDF: Flash + Monitor",
+      "type": "shell",
+      "command": "idf.py -p ${input:serialPort} flash monitor",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "LVGL: Import Editor Export",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/import_ui.ps1",
+        "-Source",
+        "${input:editorExportPath}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "LVGL: Import lvgl-ui",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/import_ui.ps1",
+        "-Source",
+        "${workspaceFolder}/lvgl-ui"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "LVGL: Import lvgl-ui + Flash + Monitor",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "LVGL: Import lvgl-ui",
+        "ESP-IDF: Flash + Monitor"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "serialPort",
+      "type": "promptString",
+      "description": "Serial port for your board (example: COM3)",
+      "default": "COM3"
+    },
+    {
+      "id": "editorExportPath",
+      "type": "promptString",
+      "description": "Path to your LVGL editor export folder"
+    }
+  ]
+}

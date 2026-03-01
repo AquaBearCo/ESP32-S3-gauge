@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "lvgl-ui",
+      "path": "lvgl-ui"
+    },
+    {
+      "name": "esp32-s3-gauge",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "C_Cpp.default.configurationProvider": "espressif.esp-idf-extension"
+  }
+}

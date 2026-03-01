@@ -1,0 +1,42 @@
+menu "Gauge App Settings"
+
+config GAUGE_USE_EDITOR_UI
+    bool "Use LVGL editor generated UI"
+    default n
+    help
+        If enabled, app_main() starts the generated UI entry point.
+        If no generated export is present, a stub screen is shown.
+
+config GAUGE_SENSOR_PERIOD_MS
+    int "Sensor loop period (ms)"
+    range 10 200
+    default 20
+    help
+        Lower values update faster and use more CPU.
+
+config GAUGE_SEA_LEVEL_HPA_X10
+    int "Sea-level pressure (hPa x10)"
+    range 8000 12000
+    default 10132
+    help
+        10132 = 1013.2 hPa. Used for pressure-to-altitude conversion.
+
+config GAUGE_ENABLE_AUTO_BASELINE
+    bool "Auto-baseline sea-level pressure at startup"
+    default y
+    help
+        Uses first valid barometer sample as baseline.
+
+config GAUGE_SPEED_DAMPING_PERMIL
+    int "Speed damping (permil)"
+    range 900 1000
+    default 996
+    help
+        996 means speed is multiplied by 0.996 each sensor step.
+
+config GAUGE_BACKLIGHT_PERCENT
+    int "LCD backlight percent"
+    range 10 100
+    default 75
+
+endmenu

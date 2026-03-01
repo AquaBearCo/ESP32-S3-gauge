@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "espressif.esp-idf-extension",
+    "ms-vscode.cpptools",
+    "LVGL.lvgl-editor",
+    "LVGL.lvgl-project-creator-vscode"
+  ]
+}

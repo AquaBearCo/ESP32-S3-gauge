@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.16)
+
+# ESP-IDF build path (idf.py / VS Code ESP-IDF extension)
+if(ESP_PLATFORM)
+  if(NOT DEFINED ENV{IDF_PATH} OR "$ENV{IDF_PATH}" STREQUAL "")
+    message(FATAL_ERROR "ESP_PLATFORM is set but IDF_PATH is not defined. Open an ESP-IDF shell or run idf.py from the ESP-IDF extension.")
+  endif()
+  include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+  project(lvgl_ui)
+else()
+  # Host preview build path (LVGL Editor compile/preview)
+  project(LVGLProject)
+
+  include(${CMAKE_CURRENT_LIST_DIR}/file_list_gen.cmake)
+  add_library(lib-ui ${PROJECT_SOURCES})
+  target_include_directories(lib-ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
