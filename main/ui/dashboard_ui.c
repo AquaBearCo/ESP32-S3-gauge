@@ -29,6 +29,9 @@ static uint32_t s_hold_start_ms = 0;
 static uint32_t s_cal_feedback_until_ms = 0;
 static lv_obj_t *s_screens[3] = {0};
 static int s_screen_index = 0;
+static uint32_t s_last_tap_ms = 0;
+
+#define DOUBLE_TAP_WINDOW_MS 350U
 
 static float clampf(float value, float min_v, float max_v)
 {
@@ -43,11 +46,17 @@ static float clampf(float value, float min_v, float max_v)
 
 static void cycle_screen_event_cb(lv_event_t *e)
 {
-    if (lv_event_get_code(e) != LV_EVENT_DOUBLE_CLICKED) {
+    if (lv_event_get_code(e) != LV_EVENT_SHORT_CLICKED) {
         return;
     }
-    s_screen_index = (s_screen_index + 1) % 3;
-    lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
+    const uint32_t now = lv_tick_get();
+    if ((now - s_last_tap_ms) <= DOUBLE_TAP_WINDOW_MS) {
+        s_screen_index = (s_screen_index + 1) % 3;
+        lv_scr_load_anim(s_screens[s_screen_index], LV_SCR_LOAD_ANIM_MOVE_LEFT, 180, 0, false);
+        s_last_tap_ms = 0;
+    } else {
+        s_last_tap_ms = now;
+    }
 }
 
 static void add_cycle_hotspot(lv_obj_t *parent)
@@ -58,7 +67,7 @@ static void add_cycle_hotspot(lv_obj_t *parent)
     lv_obj_set_style_border_opa(tap, LV_OPA_TRANSP, 0);
     lv_obj_set_style_pad_all(tap, 0, 0);
     lv_obj_add_flag(tap, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_add_event_cb(tap, cycle_screen_event_cb, LV_EVENT_DOUBLE_CLICKED, NULL);
+    lv_obj_add_event_cb(tap, cycle_screen_event_cb, LV_EVENT_SHORT_CLICKED, NULL);
 }
 
 static void center_hold_event_cb(lv_event_t *e)
